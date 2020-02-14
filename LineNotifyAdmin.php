@@ -4,7 +4,22 @@ class LineNotifyAdmin
     const OPTIONS_KEY = 'wp_line_notify_options';
 
     public function __construct() {
+        register_activation_hook(__FILE__, [$this, 'activate']);
+        register_deactivation_hook(__FILE__, [$this, 'deactivate']);
+
         add_action('admin_menu', [$this, 'addMenu']);
+    }
+
+    // プラグインインストール時に実行される
+    public function activate()
+    {
+
+    }
+
+    // プラグアンインインストール時に実行される
+    public function deactivate()
+    {
+        delete_option(self::OPTIONS_KEY);
     }
 
     public function addMenu() {

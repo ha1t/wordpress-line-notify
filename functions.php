@@ -22,7 +22,6 @@ if (!function_exists('wp_mail'))
         $token = $options['line_notify_token'];
         exec('curl -s -X POST -H "Authorization: Bearer ' . $token . '" -F "message=' . $line_message . '" https://notify-api.line.me/api/notify');
     }
-
 }
 
 new LineNotifyAdmin();
