@@ -7,7 +7,7 @@ Version: 0.0.1
 Author: ha1t
 */
 
-require_once dirname(__FILE__) . '/LineNotifyAdmin.php';
+require_once dirname(__FILE__) . '/LineNotify.php';
 
 if (!function_exists('wp_mail'))
 {
@@ -18,11 +18,11 @@ if (!function_exists('wp_mail'))
         $line_message.= $message . PHP_EOL;
         $line_message.= $headers . PHP_EOL;
 
-        $options  = get_option(LineNotifyAdmin::OPTIONS_KEY);
+        $options  = get_option(LineNotify::OPTIONS_KEY);
         $token = $options['line_notify_token'];
         exec('curl -s -X POST -H "Authorization: Bearer ' . $token . '" -F "message=' . $line_message . '" https://notify-api.line.me/api/notify');
     }
 }
 
-new LineNotifyAdmin();
+new LineNotify();
 
